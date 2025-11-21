@@ -1,3 +1,5 @@
+**Эта папка и все файлы внутри нужны исключительно для примера. Смысловой нагрузки вложенные файлы не несут.**
+
 Официальная документация Django (главная): https://docs.djangoproject.com/en/stable/
 
 Модели: https://docs.djangoproject.com/en/stable/topics/db/models/
