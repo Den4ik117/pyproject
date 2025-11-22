@@ -6,13 +6,12 @@
 - **Группа:** РИМ-150950
 - **Направление:** Прикладной анализ данных
 
-## Требования
+## Инструкции
 
-- В папке example/ находится проект-пример, никакой смысловой нагрузки он не несёт
-- Создал командой `django-admin startproject tickit_site .` папку tickit_site/ с шаблонными файлами
-- Создал командой `python manage.py startapp tickit` папку tickit/ с шаблонными файлами
-- Сгенерируй для описания ниже модели, сущности и миграции
-- Проект "Продажа и бронирование билетов в кино"
+1. Установить зависимости из `requirements.txt`
+2. Запустить миграции командой `python manage.py migrate`
+3. Запустить dev-сервер командой `python manage.py runserver`
+4. Прогнать тесты командой `python manage.py test`
 
 ## Сущности
 
@@ -21,7 +20,7 @@
 3. Расписание сеансов `sessions`
 4. Билеты `tickets`
 5. При создании сессии `sessions` для всех мест `places` создаются билеты `tickets` изначально со статусом 'available'
-6. В качестве БД пока что использовать sqlite
+6. В качестве БД используется sqlite
 
 ## Связи
 
@@ -31,6 +30,8 @@
 4. `sessions`: id (int pk), movie_id (int fk movies), room_id (int fk rooms), start (timestamp with tz), end (timestamp with tz)
 5. `tickets`: id (int pk), uuid (string unique), session_id (int fk sessions), place_id (int fk places), status (fk enum), price (decimal); unique(session_id, place_id)
 6. `statuses` (enum): 'available', 'sold', 'reserved'
+
+Связи описывал для удобства перед тем как проектировать модели, чтобы определиться с функционалом.
 
 ## Страницы
 
