@@ -1,0 +1,63 @@
+{% extends "tickit/base.html" %}
+
+{% block title %}Купить или забронировать{% endblock %}
+
+{% block content %}
+<h1>Купить или забронировать билет</h1>
+
+<form method="post" novalidate>
+    {% csrf_token %}
+    {% for field in form %}
+        <div>
+            <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+            {% if field.field.widget.input_type == "radio" %}
+                <div class="radio-group">
+                    {{ field }}
+                </div>
+            {% else %}
+                {{ field }}
+            {% endif %}
+            {% for error in field.errors %}
+                <div class="message error">{{ error }}</div>
+            {% endfor %}
+        </div>
+    {% endfor %}
+    {% if form.non_field_errors %}
+        {% for error in form.non_field_errors %}
+            <div class="message error">{{ error }}</div>
+        {% endfor %}
+    {% endif %}
+    <button type="submit">Продолжить</button>
+</form>
+
+{% if selected_session %}
+    <h2>Места для сеанса</h2>
+    <p>
+        Фильм: {{ selected_session.movie.title }}<br>
+        Зал: {{ selected_session.room.name }}<br>
+        Сеанс: {{ selected_session.start }} – {{ selected_session.end }}
+    </p>
+    {% if tickets %}
+        <table>
+            <thead>
+                <tr>
+                    <th>Место</th>
+                    <th>Статус</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for ticket in tickets %}
+                    <tr>
+                        <td>{{ ticket.place.code }}</td>
+                        <td>
+                            <span class="badge {{ ticket.status }}">{{ ticket.get_status_display }}</span>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>Билеты для этого сеанса не найдены.</p>
+    {% endif %}
+{% endif %}
+{% endblock %}

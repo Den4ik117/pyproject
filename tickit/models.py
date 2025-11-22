@@ -52,9 +52,9 @@ class Session(models.Model):
 
 
 class TicketStatus(models.TextChoices):
-    AVAILABLE = "available", "Available"
-    SOLD = "sold", "Sold"
-    RESERVED = "reserved", "Reserved"
+    AVAILABLE = "available", "Свободен"
+    SOLD = "sold", "Продан"
+    RESERVED = "reserved", "Забронирован"
 
 
 class Ticket(models.Model):

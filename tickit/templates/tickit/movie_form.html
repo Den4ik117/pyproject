@@ -1,0 +1,28 @@
+{% extends "tickit/base.html" %}
+
+{% block title %}Создать фильм{% endblock %}
+
+{% block content %}
+<h1>Создать фильм</h1>
+<form method="post" novalidate>
+    {% csrf_token %}
+    {% for field in form %}
+        <div>
+            <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+            {{ field }}
+            {% if field.help_text %}
+                <small>{{ field.help_text }}</small>
+            {% endif %}
+            {% for error in field.errors %}
+                <div class="message error">{{ error }}</div>
+            {% endfor %}
+        </div>
+    {% endfor %}
+    {% if form.non_field_errors %}
+        {% for error in form.non_field_errors %}
+            <div class="message error">{{ error }}</div>
+        {% endfor %}
+    {% endif %}
+    <button type="submit">Сохранить</button>
+</form>
+{% endblock %}

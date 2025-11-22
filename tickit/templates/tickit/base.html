@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Tickit{% endblock %}</title>
+    <style>
+        body { font-family: Arial, sans-serif; background: #f6f7fb; margin: 0; padding: 0; }
+        header { background: #1f2937; color: #fff; padding: 12px 20px; }
+        nav a { color: #fff; margin-right: 16px; text-decoration: none; font-weight: bold; }
+        main { max-width: 720px; margin: 24px auto; background: #fff; padding: 24px; border-radius: 10px; box-shadow: 0 4px 16px rgba(0,0,0,0.08); }
+        h1 { margin-top: 0; }
+        form div { margin-bottom: 12px; }
+        label { display: block; font-weight: 600; margin-bottom: 4px; }
+        input[type="text"], textarea, select, input[type="number"], input[type="datetime-local"] { width: 100%; padding: 8px; box-sizing: border-box; border: 1px solid #d1d5db; border-radius: 6px; }
+        textarea { min-height: 80px; }
+        .radio-group { display: flex; gap: 12px; }
+        button { padding: 10px 16px; border: none; background: #2563eb; color: #fff; border-radius: 6px; cursor: pointer; font-weight: 600; }
+        button:hover { background: #1d4ed8; }
+        .messages { margin-bottom: 16px; }
+        .messages .message { padding: 10px 12px; border-radius: 6px; margin-bottom: 8px; }
+        .messages .success { background: #ecfdf3; color: #166534; border: 1px solid #bbf7d0; }
+        .messages .error { background: #fef2f2; color: #991b1b; border: 1px solid #fecdd3; }
+        table { width: 100%; border-collapse: collapse; margin-top: 16px; }
+        th, td { padding: 8px 10px; border-bottom: 1px solid #e5e7eb; text-align: left; }
+        .badge { display: inline-block; padding: 4px 8px; border-radius: 6px; font-size: 12px; font-weight: 600; }
+        .badge.available { background: #ecfdf3; color: #166534; }
+        .badge.reserved { background: #fef9c3; color: #854d0e; }
+        .badge.sold { background: #fee2e2; color: #991b1b; }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="{% url 'home' %}">Главная</a>
+            <a href="{% url 'movie_create' %}">Создать фильм</a>
+            <a href="{% url 'session_create' %}">Создать расписание</a>
+            <a href="{% url 'ticket_purchase' %}">Купить / бронь</a>
+        </nav>
+    </header>
+    <main>
+        {% if messages %}
+            <div class="messages">
+                {% for message in messages %}
+                    <div class="message {{ message.tags }}">{{ message }}</div>
+                {% endfor %}
+            </div>
+        {% endif %}
+        {% block content %}{% endblock %}
+    </main>
+</body>
+</html>

@@ -1,0 +1,15 @@
+{% extends "tickit/base.html" %}
+
+{% block title %}Билет {{ ticket.uuid }}{% endblock %}
+
+{% block content %}
+<h1>Билет</h1>
+<p><strong>UUID:</strong> {{ ticket.uuid }}</p>
+<p><strong>Статус:</strong> <span class="badge {{ ticket.status }}">{{ ticket.get_status_display }}</span></p>
+<p><strong>Фильм:</strong> {{ ticket.session.movie.title }}</p>
+<p><strong>Зал:</strong> {{ ticket.session.room.name }}</p>
+<p><strong>Место:</strong> {{ ticket.place.code }}</p>
+<p><strong>Сеанс:</strong> {{ ticket.session.start }} – {{ ticket.session.end }}</p>
+
+<p><a href="{% url 'ticket_purchase' %}">Вернуться к покупке</a></p>
+{% endblock %}

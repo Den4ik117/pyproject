@@ -31,3 +31,12 @@
 4. `sessions`: id (int pk), movie_id (int fk movies), room_id (int fk rooms), start (timestamp with tz), end (timestamp with tz)
 5. `tickets`: id (int pk), uuid (string unique), session_id (int fk sessions), place_id (int fk places), status (fk enum), price (decimal); unique(session_id, place_id)
 6. `statuses` (enum): 'available', 'sold', 'reserved'
+
+## Страницы
+
+1. Страница для создания фильма: название, описание, длительность в минутах
+2. Страница для создания расписания: выбрать фильм, выбрать зал, ввести дату и время начала и дату и время окончания фильма
+3. При создании расписания автоматически создавать билеты для всех мест, делать их свободными
+4. Страница для покупки или резервирования места
+5. Страница просмотра билета
+6. Валидация для всех данных
